@@ -16,15 +16,23 @@ app.get('/listar', (req, res) => {
 })
 
 app.post('/adicionar', (req, res) => {
-  const {title,message} = req.body;
-  const id = uuid();
+  try {
 
-  tarefas.push({id,title,message})
+    const {title,message} = req.body;
+    const id = uuid();
 
-  res.status(201).json({id,title,message});
+    tarefas.push({id,title,message})
+
+    res.status(201).json({id,title,message});
+
+  } catch (error) {
+  
+    res.status(500).send(error);
+  }
 })
 
 app.put('/mudar/:id', (req, res) => {
+ try {
   const id = req.params.id;
   const {title,message} = req.body;
   const position = tarefas.findIndex((tarefa) => tarefa.id == id);
@@ -42,9 +50,14 @@ app.put('/mudar/:id', (req, res) => {
   tarefas[position] = tarefa;
 
   res.status(200).json(tarefa);
+ } catch (error) {
+
+  res.status(500).send(error);
+ }
 });
 
 app.delete('/apaga/:id', (req, res) =>{
+try {
   const id = req.params.id;
   const position = tarefas.findIndex((tarefa) => tarefa.id == id);
 
@@ -54,6 +67,10 @@ app.delete('/apaga/:id', (req, res) =>{
 
   tarefas.splice(position,1);
   res.status(200).send('alteração feita');
+
+} catch (error) {
+  res.status(500).send(error);
+}
 })
 
 app.listen(port, () => console.log(`Aplicação rodando na porta: ${port}!`))
