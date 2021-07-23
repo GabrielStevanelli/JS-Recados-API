@@ -3,7 +3,6 @@ const {uuid} = require('uuidv4')
 const cors = require('cors')
 require('dotenv').config()
 
-
 const app = express();
 const port = process.env.PORT||8000
 
@@ -18,10 +17,11 @@ app.get('/listar', (req, res) => {
 
 app.post('/adicionar', (req, res) => {
   const {title,message} = req.body;
+  const id = uuid();
 
-  tarefas.push({id: uuid(),title,message})
+  tarefas.push({id,title,message})
 
-  res.status(201).send('tarefa cadastrada');
+  res.status(201).json({id,title,message});
 })
 
 app.put('/mudar/:id', (req, res) => {
