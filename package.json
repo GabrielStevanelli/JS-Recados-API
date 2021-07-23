@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "express":"^4.17.1",
+    "cors": "^2.8.5",
     "deploy-node-app": "^1.4.3",
-    "dotenv": "^8.0.0"
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "uuidv4": "^6.2.11"
   },
   "devDependencies": {
     "concurrently": "^4.1.0",
@@ -24,31 +26,5 @@
   },
   "scripts": {
     "start": "node ./src/api"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "deploy-node-app": {
-    "prod": {
-      "port": 8000,
-      "protocol": "http",
-      "entrypoint": "src/api/index.js",
-      "type": "spa"
-    },
-    "dev": {
-      "port": 8000,
-      "protocol": "http",
-      "entrypoint": "src/api/index.js",
-      "registry": "",
-      "type": "spa",
-      "isPublic": false
-    }
-  },
-  "proxy": "http://localhost:8000"
+  }
 }
